@@ -10,8 +10,8 @@ import {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
- */
+
+*/
 export const credoraLoanPoolAbi = [
   { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
   {
@@ -148,8 +148,211 @@ export const credoraLoanPoolAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'getAccruedInterestDetails',
+    outputs: [
+      {
+        name: 'totalInterestCalculatedForLoan',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
+      {
+        name: 'interestAccruedSoFar',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
+      {
+        name: 'interestRemainingToRepay',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getEarlyRepaymentQuote',
+    outputs: [
+      {
+        name: 'outstandingPrincipal',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
+      { name: 'currentInterestDue', internalType: 'uint256', type: 'uint256' },
+      { name: 'totalAmountDue', internalType: 'uint256', type: 'uint256' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'getFundingRemaining',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getFundingStatus',
+    outputs: [
+      { name: 'fundedAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'requiredAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'remainingToFund', internalType: 'uint256', type: 'uint256' },
+      { name: 'isFullyFunded', internalType: 'bool', type: 'bool' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_lender', internalType: 'address', type: 'address' }],
+    name: 'getLenderPoolInformation',
+    outputs: [
+      {
+        name: 'lenderInfo',
+        internalType: 'struct LenderPoolInfo',
+        type: 'tuple',
+        components: [
+          { name: 'shares', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'principalAlreadyClaimedByLender',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'claimablePrincipalNow',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'claimableInterestNow',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getLoanPoolInfo',
+    outputs: [
+      {
+        name: 'info',
+        internalType: 'struct FullLoanPoolInfo',
+        type: 'tuple',
+        components: [
+          { name: 'poolAddress', internalType: 'address', type: 'address' },
+          { name: 'borrower', internalType: 'address', type: 'address' },
+          {
+            name: 'loanAmountPrincipal',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          { name: 'interestRateBPS', internalType: 'uint256', type: 'uint256' },
+          { name: 'durationSeconds', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'numberOfInstallments',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'acceptedCurrency',
+            internalType: 'address',
+            type: 'address',
+          },
+          { name: 'loanPurpose', internalType: 'string', type: 'string' },
+          { name: 'poolTokenName', internalType: 'string', type: 'string' },
+          { name: 'poolTokenSymbol', internalType: 'string', type: 'string' },
+          { name: 'tokenDecimals', internalType: 'uint8', type: 'uint8' },
+          { name: 'poolAdmin', internalType: 'address', type: 'address' },
+          {
+            name: 'currentStatus',
+            internalType: 'enum CredoraLoanPool.LoanStatus',
+            type: 'uint8',
+          },
+          {
+            name: 'totalFundsRaised',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          { name: 'loanStartTime', internalType: 'uint256', type: 'uint256' },
+          { name: 'maturityTime', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'totalPrincipalRepaid',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'totalInterestRepaid',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'currentInstallmentPaidCount',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'installmentIntervalSeconds',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'installmentPrincipalPerPeriod',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'installmentInterestPerPeriod',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nextInstallmentDueDate',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          { name: 'isPaused', internalType: 'bool', type: 'bool' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getNextInstallmentDetails',
+    outputs: [
+      { name: 'principalDue', internalType: 'uint256', type: 'uint256' },
+      { name: 'interestDue', internalType: 'uint256', type: 'uint256' },
+      { name: 'dueDate', internalType: 'uint256', type: 'uint256' },
+      { name: 'isFinalInstallment', internalType: 'bool', type: 'bool' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getPoolDynamicState',
+    outputs: [
+      {
+        name: 'status',
+        internalType: 'enum CredoraLoanPool.LoanStatus',
+        type: 'uint8',
+      },
+      { name: 'fundsRaised', internalType: 'uint256', type: 'uint256' },
+      { name: 'principalRepaid', internalType: 'uint256', type: 'uint256' },
+      { name: 'interestRepaid', internalType: 'uint256', type: 'uint256' },
+      {
+        name: 'installmentsPaidCount',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
+      { name: 'nextDueDateTime', internalType: 'uint256', type: 'uint256' },
+      { name: 'currentlyPaused', internalType: 'bool', type: 'bool' },
+    ],
     stateMutability: 'view',
   },
   {
@@ -181,6 +384,25 @@ export const credoraLoanPoolAbi = [
     inputs: [{ name: 'role', internalType: 'bytes32', type: 'bytes32' }],
     name: 'getRoleMembers',
     outputs: [{ name: '', internalType: 'address[]', type: 'address[]' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getTimeMetrics',
+    outputs: [
+      {
+        name: 'timeElapsedSinceStart',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
+      { name: 'timeRemainingOnLoan', internalType: 'uint256', type: 'uint256' },
+      {
+        name: 'timeUntilNextInstallment',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
+    ],
     stateMutability: 'view',
   },
   {
@@ -907,15 +1129,13 @@ export const credoraLoanPoolAbi = [
 ] as const
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
- */
-export const credoraLoanPoolAddress = {
-  42421: '0xb66be66C0e6651c6639756EC2380d6020329d0f1',
-} as const
+
+*/
+export const credoraLoanPoolAddress = {} as const
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
- */
+
+*/
 export const credoraLoanPoolConfig = {
   address: credoraLoanPoolAddress,
   abi: credoraLoanPoolAbi,
@@ -926,7 +1146,7 @@ export const credoraLoanPoolConfig = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const credoraPoolFactoryAbi = [
   {
@@ -1033,6 +1253,37 @@ export const credoraPoolFactoryAbi = [
     inputs: [],
     name: 'getAllPools',
     outputs: [{ name: '', internalType: 'address[]', type: 'address[]' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_borrower', internalType: 'address', type: 'address' }],
+    name: 'getBorrowerDetails',
+    outputs: [
+      {
+        name: 'riskProfile',
+        internalType: 'struct CredoraPoolFactory.BorrowerRiskProfile',
+        type: 'tuple',
+        components: [
+          { name: 'maxLoanAmount', internalType: 'uint256', type: 'uint256' },
+          { name: 'interestRateBPS', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'assessmentTimestamp',
+            internalType: 'uint64',
+            type: 'uint64',
+          },
+          { name: 'exists', internalType: 'bool', type: 'bool' },
+        ],
+      },
+      { name: 'pools', internalType: 'address[]', type: 'address[]' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_borrower', internalType: 'address', type: 'address' }],
+    name: 'getBorrowerRiskProfileExists',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
     stateMutability: 'view',
   },
   {
@@ -1357,14 +1608,14 @@ export const credoraPoolFactoryAbi = [
 ] as const
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const credoraPoolFactoryAddress = {
-  42421: '0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261',
+  42421: '0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052',
 } as const
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const credoraPoolFactoryConfig = {
   address: credoraPoolFactoryAddress,
@@ -1376,7 +1627,7 @@ export const credoraPoolFactoryConfig = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const mockUsdcAbi = [
   {
@@ -1569,14 +1820,14 @@ export const mockUsdcAbi = [
 ] as const
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const mockUsdcAddress = {
-  42421: '0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB',
+  42421: '0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9',
 } as const
 
 /**
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const mockUsdcConfig = {
   address: mockUsdcAddress,
@@ -1589,8 +1840,6 @@ export const mockUsdcConfig = {
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPool = /*#__PURE__*/ createUseReadContract({
   abi: credoraLoanPoolAbi,
@@ -1599,8 +1848,6 @@ export const useReadCredoraLoanPool = /*#__PURE__*/ createUseReadContract({
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"DEFAULT_ADMIN_ROLE"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolDefaultAdminRole =
   /*#__PURE__*/ createUseReadContract({
@@ -1611,8 +1858,6 @@ export const useReadCredoraLoanPoolDefaultAdminRole =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"MINTER_ROLE"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolMinterRole =
   /*#__PURE__*/ createUseReadContract({
@@ -1623,8 +1868,6 @@ export const useReadCredoraLoanPoolMinterRole =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"PAUSER_ROLE"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolPauserRole =
   /*#__PURE__*/ createUseReadContract({
@@ -1635,8 +1878,6 @@ export const useReadCredoraLoanPoolPauserRole =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"acceptedCurrency"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolAcceptedCurrency =
   /*#__PURE__*/ createUseReadContract({
@@ -1647,8 +1888,6 @@ export const useReadCredoraLoanPoolAcceptedCurrency =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"allowance"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolAllowance =
   /*#__PURE__*/ createUseReadContract({
@@ -1659,8 +1898,6 @@ export const useReadCredoraLoanPoolAllowance =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"balanceOf"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolBalanceOf =
   /*#__PURE__*/ createUseReadContract({
@@ -1671,8 +1908,6 @@ export const useReadCredoraLoanPoolBalanceOf =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"borrower"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolBorrower =
   /*#__PURE__*/ createUseReadContract({
@@ -1683,8 +1918,6 @@ export const useReadCredoraLoanPoolBorrower =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"calculateInterest"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolCalculateInterest =
   /*#__PURE__*/ createUseReadContract({
@@ -1695,8 +1928,6 @@ export const useReadCredoraLoanPoolCalculateInterest =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"calculateTotalLoanInterest"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolCalculateTotalLoanInterest =
   /*#__PURE__*/ createUseReadContract({
@@ -1707,8 +1938,6 @@ export const useReadCredoraLoanPoolCalculateTotalLoanInterest =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"currentInstallmentPaidCount"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolCurrentInstallmentPaidCount =
   /*#__PURE__*/ createUseReadContract({
@@ -1719,8 +1948,6 @@ export const useReadCredoraLoanPoolCurrentInstallmentPaidCount =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"currentStatus"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolCurrentStatus =
   /*#__PURE__*/ createUseReadContract({
@@ -1731,8 +1958,6 @@ export const useReadCredoraLoanPoolCurrentStatus =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"decimals"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolDecimals =
   /*#__PURE__*/ createUseReadContract({
@@ -1743,8 +1968,6 @@ export const useReadCredoraLoanPoolDecimals =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"durationSeconds"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolDurationSeconds =
   /*#__PURE__*/ createUseReadContract({
@@ -1754,9 +1977,27 @@ export const useReadCredoraLoanPoolDurationSeconds =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getAccruedInterestDetails"`
+ */
+export const useReadCredoraLoanPoolGetAccruedInterestDetails =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraLoanPoolAbi,
+    address: credoraLoanPoolAddress,
+    functionName: 'getAccruedInterestDetails',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getEarlyRepaymentQuote"`
+ */
+export const useReadCredoraLoanPoolGetEarlyRepaymentQuote =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraLoanPoolAbi,
+    address: credoraLoanPoolAddress,
+    functionName: 'getEarlyRepaymentQuote',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getFundingRemaining"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolGetFundingRemaining =
   /*#__PURE__*/ createUseReadContract({
@@ -1766,9 +2007,57 @@ export const useReadCredoraLoanPoolGetFundingRemaining =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getFundingStatus"`
+ */
+export const useReadCredoraLoanPoolGetFundingStatus =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraLoanPoolAbi,
+    address: credoraLoanPoolAddress,
+    functionName: 'getFundingStatus',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getLenderPoolInformation"`
+ */
+export const useReadCredoraLoanPoolGetLenderPoolInformation =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraLoanPoolAbi,
+    address: credoraLoanPoolAddress,
+    functionName: 'getLenderPoolInformation',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getLoanPoolInfo"`
+ */
+export const useReadCredoraLoanPoolGetLoanPoolInfo =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraLoanPoolAbi,
+    address: credoraLoanPoolAddress,
+    functionName: 'getLoanPoolInfo',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getNextInstallmentDetails"`
+ */
+export const useReadCredoraLoanPoolGetNextInstallmentDetails =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraLoanPoolAbi,
+    address: credoraLoanPoolAddress,
+    functionName: 'getNextInstallmentDetails',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getPoolDynamicState"`
+ */
+export const useReadCredoraLoanPoolGetPoolDynamicState =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraLoanPoolAbi,
+    address: credoraLoanPoolAddress,
+    functionName: 'getPoolDynamicState',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getRoleAdmin"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolGetRoleAdmin =
   /*#__PURE__*/ createUseReadContract({
@@ -1779,8 +2068,6 @@ export const useReadCredoraLoanPoolGetRoleAdmin =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getRoleMember"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolGetRoleMember =
   /*#__PURE__*/ createUseReadContract({
@@ -1791,8 +2078,6 @@ export const useReadCredoraLoanPoolGetRoleMember =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getRoleMemberCount"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolGetRoleMemberCount =
   /*#__PURE__*/ createUseReadContract({
@@ -1803,8 +2088,6 @@ export const useReadCredoraLoanPoolGetRoleMemberCount =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getRoleMembers"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolGetRoleMembers =
   /*#__PURE__*/ createUseReadContract({
@@ -1814,9 +2097,17 @@ export const useReadCredoraLoanPoolGetRoleMembers =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getTimeMetrics"`
+ */
+export const useReadCredoraLoanPoolGetTimeMetrics =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraLoanPoolAbi,
+    address: credoraLoanPoolAddress,
+    functionName: 'getTimeMetrics',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"getTotalOwed"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolGetTotalOwed =
   /*#__PURE__*/ createUseReadContract({
@@ -1827,8 +2118,6 @@ export const useReadCredoraLoanPoolGetTotalOwed =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"hasRole"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolHasRole =
   /*#__PURE__*/ createUseReadContract({
@@ -1839,8 +2128,6 @@ export const useReadCredoraLoanPoolHasRole =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"installmentInterestPerPeriod"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolInstallmentInterestPerPeriod =
   /*#__PURE__*/ createUseReadContract({
@@ -1851,8 +2138,6 @@ export const useReadCredoraLoanPoolInstallmentInterestPerPeriod =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"installmentIntervalSeconds"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolInstallmentIntervalSeconds =
   /*#__PURE__*/ createUseReadContract({
@@ -1863,8 +2148,6 @@ export const useReadCredoraLoanPoolInstallmentIntervalSeconds =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"installmentPrincipalPerPeriod"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolInstallmentPrincipalPerPeriod =
   /*#__PURE__*/ createUseReadContract({
@@ -1875,8 +2158,6 @@ export const useReadCredoraLoanPoolInstallmentPrincipalPerPeriod =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"interestRateBPS"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolInterestRateBps =
   /*#__PURE__*/ createUseReadContract({
@@ -1887,8 +2168,6 @@ export const useReadCredoraLoanPoolInterestRateBps =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"lenderPrincipalClaimed"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolLenderPrincipalClaimed =
   /*#__PURE__*/ createUseReadContract({
@@ -1899,8 +2178,6 @@ export const useReadCredoraLoanPoolLenderPrincipalClaimed =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"loanAmountPrincipal"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolLoanAmountPrincipal =
   /*#__PURE__*/ createUseReadContract({
@@ -1911,8 +2188,6 @@ export const useReadCredoraLoanPoolLoanAmountPrincipal =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"loanPurpose"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolLoanPurpose =
   /*#__PURE__*/ createUseReadContract({
@@ -1923,8 +2198,6 @@ export const useReadCredoraLoanPoolLoanPurpose =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"loanStartTime"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolLoanStartTime =
   /*#__PURE__*/ createUseReadContract({
@@ -1935,8 +2208,6 @@ export const useReadCredoraLoanPoolLoanStartTime =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"maturityTime"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolMaturityTime =
   /*#__PURE__*/ createUseReadContract({
@@ -1947,8 +2218,6 @@ export const useReadCredoraLoanPoolMaturityTime =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"name"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolName = /*#__PURE__*/ createUseReadContract({
   abi: credoraLoanPoolAbi,
@@ -1958,8 +2227,6 @@ export const useReadCredoraLoanPoolName = /*#__PURE__*/ createUseReadContract({
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"nextInstallmentDueDate"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolNextInstallmentDueDate =
   /*#__PURE__*/ createUseReadContract({
@@ -1970,8 +2237,6 @@ export const useReadCredoraLoanPoolNextInstallmentDueDate =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"numberOfInstallments"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolNumberOfInstallments =
   /*#__PURE__*/ createUseReadContract({
@@ -1982,8 +2247,6 @@ export const useReadCredoraLoanPoolNumberOfInstallments =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"paused"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolPaused = /*#__PURE__*/ createUseReadContract(
   {
@@ -1995,8 +2258,6 @@ export const useReadCredoraLoanPoolPaused = /*#__PURE__*/ createUseReadContract(
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"poolAdmin"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolPoolAdmin =
   /*#__PURE__*/ createUseReadContract({
@@ -2007,8 +2268,6 @@ export const useReadCredoraLoanPoolPoolAdmin =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"supportsInterface"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolSupportsInterface =
   /*#__PURE__*/ createUseReadContract({
@@ -2019,8 +2278,6 @@ export const useReadCredoraLoanPoolSupportsInterface =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"symbol"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolSymbol = /*#__PURE__*/ createUseReadContract(
   {
@@ -2032,8 +2289,6 @@ export const useReadCredoraLoanPoolSymbol = /*#__PURE__*/ createUseReadContract(
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"totalFundsRaised"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolTotalFundsRaised =
   /*#__PURE__*/ createUseReadContract({
@@ -2044,8 +2299,6 @@ export const useReadCredoraLoanPoolTotalFundsRaised =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"totalInterestRepaid"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolTotalInterestRepaid =
   /*#__PURE__*/ createUseReadContract({
@@ -2056,8 +2309,6 @@ export const useReadCredoraLoanPoolTotalInterestRepaid =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"totalPrincipalRepaid"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolTotalPrincipalRepaid =
   /*#__PURE__*/ createUseReadContract({
@@ -2068,8 +2319,6 @@ export const useReadCredoraLoanPoolTotalPrincipalRepaid =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"totalSupply"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useReadCredoraLoanPoolTotalSupply =
   /*#__PURE__*/ createUseReadContract({
@@ -2080,8 +2329,6 @@ export const useReadCredoraLoanPoolTotalSupply =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPool = /*#__PURE__*/ createUseWriteContract({
   abi: credoraLoanPoolAbi,
@@ -2090,8 +2337,6 @@ export const useWriteCredoraLoanPool = /*#__PURE__*/ createUseWriteContract({
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"approve"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolApprove =
   /*#__PURE__*/ createUseWriteContract({
@@ -2102,8 +2347,6 @@ export const useWriteCredoraLoanPoolApprove =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"cancelLoan"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolCancelLoan =
   /*#__PURE__*/ createUseWriteContract({
@@ -2114,8 +2357,6 @@ export const useWriteCredoraLoanPoolCancelLoan =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"claimYield"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolClaimYield =
   /*#__PURE__*/ createUseWriteContract({
@@ -2126,8 +2367,6 @@ export const useWriteCredoraLoanPoolClaimYield =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"fund"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolFund = /*#__PURE__*/ createUseWriteContract(
   {
@@ -2139,8 +2378,6 @@ export const useWriteCredoraLoanPoolFund = /*#__PURE__*/ createUseWriteContract(
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"grantRole"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolGrantRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2151,8 +2388,6 @@ export const useWriteCredoraLoanPoolGrantRole =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"initialize"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolInitialize =
   /*#__PURE__*/ createUseWriteContract({
@@ -2163,8 +2398,6 @@ export const useWriteCredoraLoanPoolInitialize =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"markAsDefaulted"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolMarkAsDefaulted =
   /*#__PURE__*/ createUseWriteContract({
@@ -2175,8 +2408,6 @@ export const useWriteCredoraLoanPoolMarkAsDefaulted =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"pause"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolPause =
   /*#__PURE__*/ createUseWriteContract({
@@ -2187,8 +2418,6 @@ export const useWriteCredoraLoanPoolPause =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"renounceRole"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolRenounceRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2199,8 +2428,6 @@ export const useWriteCredoraLoanPoolRenounceRole =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"repayFullLoan"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolRepayFullLoan =
   /*#__PURE__*/ createUseWriteContract({
@@ -2211,8 +2438,6 @@ export const useWriteCredoraLoanPoolRepayFullLoan =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"repayInstallment"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolRepayInstallment =
   /*#__PURE__*/ createUseWriteContract({
@@ -2223,8 +2448,6 @@ export const useWriteCredoraLoanPoolRepayInstallment =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"revokeRole"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolRevokeRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2235,8 +2458,6 @@ export const useWriteCredoraLoanPoolRevokeRole =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"transfer"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolTransfer =
   /*#__PURE__*/ createUseWriteContract({
@@ -2247,8 +2468,6 @@ export const useWriteCredoraLoanPoolTransfer =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"transferFrom"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -2259,8 +2478,6 @@ export const useWriteCredoraLoanPoolTransferFrom =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"unpause"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolUnpause =
   /*#__PURE__*/ createUseWriteContract({
@@ -2271,8 +2488,6 @@ export const useWriteCredoraLoanPoolUnpause =
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"withdrawCancelledFunds"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWriteCredoraLoanPoolWithdrawCancelledFunds =
   /*#__PURE__*/ createUseWriteContract({
@@ -2283,8 +2498,6 @@ export const useWriteCredoraLoanPoolWithdrawCancelledFunds =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPool =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2294,8 +2507,6 @@ export const useSimulateCredoraLoanPool =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"approve"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolApprove =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2306,8 +2517,6 @@ export const useSimulateCredoraLoanPoolApprove =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"cancelLoan"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolCancelLoan =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2318,8 +2527,6 @@ export const useSimulateCredoraLoanPoolCancelLoan =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"claimYield"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolClaimYield =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2330,8 +2537,6 @@ export const useSimulateCredoraLoanPoolClaimYield =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"fund"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolFund =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2342,8 +2547,6 @@ export const useSimulateCredoraLoanPoolFund =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"grantRole"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolGrantRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2354,8 +2557,6 @@ export const useSimulateCredoraLoanPoolGrantRole =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"initialize"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolInitialize =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2366,8 +2567,6 @@ export const useSimulateCredoraLoanPoolInitialize =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"markAsDefaulted"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolMarkAsDefaulted =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2378,8 +2577,6 @@ export const useSimulateCredoraLoanPoolMarkAsDefaulted =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"pause"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolPause =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2390,8 +2587,6 @@ export const useSimulateCredoraLoanPoolPause =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"renounceRole"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolRenounceRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2402,8 +2597,6 @@ export const useSimulateCredoraLoanPoolRenounceRole =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"repayFullLoan"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolRepayFullLoan =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2414,8 +2607,6 @@ export const useSimulateCredoraLoanPoolRepayFullLoan =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"repayInstallment"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolRepayInstallment =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2426,8 +2617,6 @@ export const useSimulateCredoraLoanPoolRepayInstallment =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"revokeRole"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolRevokeRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2438,8 +2627,6 @@ export const useSimulateCredoraLoanPoolRevokeRole =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"transfer"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolTransfer =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2450,8 +2637,6 @@ export const useSimulateCredoraLoanPoolTransfer =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"transferFrom"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2462,8 +2647,6 @@ export const useSimulateCredoraLoanPoolTransferFrom =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"unpause"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolUnpause =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2474,8 +2657,6 @@ export const useSimulateCredoraLoanPoolUnpause =
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `functionName` set to `"withdrawCancelledFunds"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useSimulateCredoraLoanPoolWithdrawCancelledFunds =
   /*#__PURE__*/ createUseSimulateContract({
@@ -2486,8 +2667,6 @@ export const useSimulateCredoraLoanPoolWithdrawCancelledFunds =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2497,8 +2676,6 @@ export const useWatchCredoraLoanPoolEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"Approval"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolApprovalEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2509,8 +2686,6 @@ export const useWatchCredoraLoanPoolApprovalEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"CancelledFundsWithdrawn"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolCancelledFundsWithdrawnEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2521,8 +2696,6 @@ export const useWatchCredoraLoanPoolCancelledFundsWithdrawnEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"Funded"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolFundedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2533,8 +2706,6 @@ export const useWatchCredoraLoanPoolFundedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"InstallmentPaid"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolInstallmentPaidEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2545,8 +2716,6 @@ export const useWatchCredoraLoanPoolInstallmentPaidEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"LoanActivated"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolLoanActivatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2557,8 +2726,6 @@ export const useWatchCredoraLoanPoolLoanActivatedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"LoanCancelled"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolLoanCancelledEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2569,8 +2736,6 @@ export const useWatchCredoraLoanPoolLoanCancelledEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"LoanDefaulted"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolLoanDefaultedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2581,8 +2746,6 @@ export const useWatchCredoraLoanPoolLoanDefaultedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"Paused"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolPausedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2593,8 +2756,6 @@ export const useWatchCredoraLoanPoolPausedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"PoolInitialized"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolPoolInitializedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2605,8 +2766,6 @@ export const useWatchCredoraLoanPoolPoolInitializedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"RepaymentMade"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolRepaymentMadeEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2617,8 +2776,6 @@ export const useWatchCredoraLoanPoolRepaymentMadeEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"RoleAdminChanged"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolRoleAdminChangedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2629,8 +2786,6 @@ export const useWatchCredoraLoanPoolRoleAdminChangedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"RoleGranted"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolRoleGrantedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2641,8 +2796,6 @@ export const useWatchCredoraLoanPoolRoleGrantedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"RoleRevoked"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolRoleRevokedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2653,8 +2806,6 @@ export const useWatchCredoraLoanPoolRoleRevokedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"Transfer"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolTransferEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2665,8 +2816,6 @@ export const useWatchCredoraLoanPoolTransferEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"Unpaused"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolUnpausedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2677,8 +2826,6 @@ export const useWatchCredoraLoanPoolUnpausedEvent =
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraLoanPoolAbi}__ and `eventName` set to `"YieldClaimed"`
- *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xb66be66C0e6651c6639756EC2380d6020329d0f1)
  */
 export const useWatchCredoraLoanPoolYieldClaimedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -2690,7 +2837,7 @@ export const useWatchCredoraLoanPoolYieldClaimedEvent =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactory = /*#__PURE__*/ createUseReadContract({
   abi: credoraPoolFactoryAbi,
@@ -2700,7 +2847,7 @@ export const useReadCredoraPoolFactory = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"ADMIN_ROLE"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryAdminRole =
   /*#__PURE__*/ createUseReadContract({
@@ -2712,7 +2859,7 @@ export const useReadCredoraPoolFactoryAdminRole =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"AI_ROLE"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryAiRole =
   /*#__PURE__*/ createUseReadContract({
@@ -2724,7 +2871,7 @@ export const useReadCredoraPoolFactoryAiRole =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"DEFAULT_ADMIN_ROLE"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryDefaultAdminRole =
   /*#__PURE__*/ createUseReadContract({
@@ -2736,7 +2883,7 @@ export const useReadCredoraPoolFactoryDefaultAdminRole =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"GOVERNANCE_ROLE"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryGovernanceRole =
   /*#__PURE__*/ createUseReadContract({
@@ -2748,7 +2895,7 @@ export const useReadCredoraPoolFactoryGovernanceRole =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"MAX_INTEREST_RATE_BPS"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryMaxInterestRateBps =
   /*#__PURE__*/ createUseReadContract({
@@ -2760,7 +2907,7 @@ export const useReadCredoraPoolFactoryMaxInterestRateBps =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"POOL_CREATOR_ROLE"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryPoolCreatorRole =
   /*#__PURE__*/ createUseReadContract({
@@ -2772,7 +2919,7 @@ export const useReadCredoraPoolFactoryPoolCreatorRole =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"acceptedCurrency"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryAcceptedCurrency =
   /*#__PURE__*/ createUseReadContract({
@@ -2784,7 +2931,7 @@ export const useReadCredoraPoolFactoryAcceptedCurrency =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"allLoanPools"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryAllLoanPools =
   /*#__PURE__*/ createUseReadContract({
@@ -2796,7 +2943,7 @@ export const useReadCredoraPoolFactoryAllLoanPools =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"borrowerLoanPools"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryBorrowerLoanPools =
   /*#__PURE__*/ createUseReadContract({
@@ -2808,7 +2955,7 @@ export const useReadCredoraPoolFactoryBorrowerLoanPools =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"getAllPools"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryGetAllPools =
   /*#__PURE__*/ createUseReadContract({
@@ -2818,9 +2965,33 @@ export const useReadCredoraPoolFactoryGetAllPools =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"getBorrowerDetails"`
+ *
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
+ */
+export const useReadCredoraPoolFactoryGetBorrowerDetails =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraPoolFactoryAbi,
+    address: credoraPoolFactoryAddress,
+    functionName: 'getBorrowerDetails',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"getBorrowerRiskProfileExists"`
+ *
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
+ */
+export const useReadCredoraPoolFactoryGetBorrowerRiskProfileExists =
+  /*#__PURE__*/ createUseReadContract({
+    abi: credoraPoolFactoryAbi,
+    address: credoraPoolFactoryAddress,
+    functionName: 'getBorrowerRiskProfileExists',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"getPoolsByBorrower"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryGetPoolsByBorrower =
   /*#__PURE__*/ createUseReadContract({
@@ -2832,7 +3003,7 @@ export const useReadCredoraPoolFactoryGetPoolsByBorrower =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"getRoleAdmin"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryGetRoleAdmin =
   /*#__PURE__*/ createUseReadContract({
@@ -2844,7 +3015,7 @@ export const useReadCredoraPoolFactoryGetRoleAdmin =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"hasRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryHasRole =
   /*#__PURE__*/ createUseReadContract({
@@ -2856,7 +3027,7 @@ export const useReadCredoraPoolFactoryHasRole =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"loanPoolImplementation"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryLoanPoolImplementation =
   /*#__PURE__*/ createUseReadContract({
@@ -2868,7 +3039,7 @@ export const useReadCredoraPoolFactoryLoanPoolImplementation =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"riskProfiles"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryRiskProfiles =
   /*#__PURE__*/ createUseReadContract({
@@ -2880,7 +3051,7 @@ export const useReadCredoraPoolFactoryRiskProfiles =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"supportsInterface"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactorySupportsInterface =
   /*#__PURE__*/ createUseReadContract({
@@ -2892,7 +3063,7 @@ export const useReadCredoraPoolFactorySupportsInterface =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"totalPools"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useReadCredoraPoolFactoryTotalPools =
   /*#__PURE__*/ createUseReadContract({
@@ -2904,7 +3075,7 @@ export const useReadCredoraPoolFactoryTotalPools =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactory = /*#__PURE__*/ createUseWriteContract({
   abi: credoraPoolFactoryAbi,
@@ -2914,7 +3085,7 @@ export const useWriteCredoraPoolFactory = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"createLoanPool"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactoryCreateLoanPool =
   /*#__PURE__*/ createUseWriteContract({
@@ -2926,7 +3097,7 @@ export const useWriteCredoraPoolFactoryCreateLoanPool =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantAIRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactoryGrantAiRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2938,7 +3109,7 @@ export const useWriteCredoraPoolFactoryGrantAiRole =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantAdminRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactoryGrantAdminRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2950,7 +3121,7 @@ export const useWriteCredoraPoolFactoryGrantAdminRole =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantGovernanceRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactoryGrantGovernanceRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2962,7 +3133,7 @@ export const useWriteCredoraPoolFactoryGrantGovernanceRole =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantPoolCreatorRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactoryGrantPoolCreatorRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2974,7 +3145,7 @@ export const useWriteCredoraPoolFactoryGrantPoolCreatorRole =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactoryGrantRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2986,7 +3157,7 @@ export const useWriteCredoraPoolFactoryGrantRole =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"renounceRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactoryRenounceRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -2998,7 +3169,7 @@ export const useWriteCredoraPoolFactoryRenounceRole =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"revokeRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactoryRevokeRole =
   /*#__PURE__*/ createUseWriteContract({
@@ -3010,7 +3181,7 @@ export const useWriteCredoraPoolFactoryRevokeRole =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"setRiskProfile"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWriteCredoraPoolFactorySetRiskProfile =
   /*#__PURE__*/ createUseWriteContract({
@@ -3022,7 +3193,7 @@ export const useWriteCredoraPoolFactorySetRiskProfile =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactory =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3033,7 +3204,7 @@ export const useSimulateCredoraPoolFactory =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"createLoanPool"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactoryCreateLoanPool =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3045,7 +3216,7 @@ export const useSimulateCredoraPoolFactoryCreateLoanPool =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantAIRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactoryGrantAiRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3057,7 +3228,7 @@ export const useSimulateCredoraPoolFactoryGrantAiRole =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantAdminRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactoryGrantAdminRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3069,7 +3240,7 @@ export const useSimulateCredoraPoolFactoryGrantAdminRole =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantGovernanceRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactoryGrantGovernanceRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3081,7 +3252,7 @@ export const useSimulateCredoraPoolFactoryGrantGovernanceRole =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantPoolCreatorRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactoryGrantPoolCreatorRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3093,7 +3264,7 @@ export const useSimulateCredoraPoolFactoryGrantPoolCreatorRole =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"grantRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactoryGrantRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3105,7 +3276,7 @@ export const useSimulateCredoraPoolFactoryGrantRole =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"renounceRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactoryRenounceRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3117,7 +3288,7 @@ export const useSimulateCredoraPoolFactoryRenounceRole =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"revokeRole"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactoryRevokeRole =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3129,7 +3300,7 @@ export const useSimulateCredoraPoolFactoryRevokeRole =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `functionName` set to `"setRiskProfile"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useSimulateCredoraPoolFactorySetRiskProfile =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3141,7 +3312,7 @@ export const useSimulateCredoraPoolFactorySetRiskProfile =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraPoolFactoryAbi}__
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWatchCredoraPoolFactoryEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3152,7 +3323,7 @@ export const useWatchCredoraPoolFactoryEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `eventName` set to `"LoanPoolCreated"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWatchCredoraPoolFactoryLoanPoolCreatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3164,7 +3335,7 @@ export const useWatchCredoraPoolFactoryLoanPoolCreatedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `eventName` set to `"RiskProfileSet"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWatchCredoraPoolFactoryRiskProfileSetEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3176,7 +3347,7 @@ export const useWatchCredoraPoolFactoryRiskProfileSetEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `eventName` set to `"RoleAdminChanged"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWatchCredoraPoolFactoryRoleAdminChangedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3188,7 +3359,7 @@ export const useWatchCredoraPoolFactoryRoleAdminChangedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `eventName` set to `"RoleGranted"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWatchCredoraPoolFactoryRoleGrantedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3200,7 +3371,7 @@ export const useWatchCredoraPoolFactoryRoleGrantedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link credoraPoolFactoryAbi}__ and `eventName` set to `"RoleRevoked"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0xee1966a0Cec962D6F6F5E1b790E0d4cC47aCB261)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x7520F7BaeC39b21C3a7D02724f8DCD7F19aE5052)
  */
 export const useWatchCredoraPoolFactoryRoleRevokedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3212,7 +3383,7 @@ export const useWatchCredoraPoolFactoryRoleRevokedEvent =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockUsdcAbi}__
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useReadMockUsdc = /*#__PURE__*/ createUseReadContract({
   abi: mockUsdcAbi,
@@ -3222,7 +3393,7 @@ export const useReadMockUsdc = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"MAX_MINT_PER_CALL_SCALED"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useReadMockUsdcMaxMintPerCallScaled =
   /*#__PURE__*/ createUseReadContract({
@@ -3234,7 +3405,7 @@ export const useReadMockUsdcMaxMintPerCallScaled =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"allowance"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useReadMockUsdcAllowance = /*#__PURE__*/ createUseReadContract({
   abi: mockUsdcAbi,
@@ -3245,7 +3416,7 @@ export const useReadMockUsdcAllowance = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"balanceOf"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useReadMockUsdcBalanceOf = /*#__PURE__*/ createUseReadContract({
   abi: mockUsdcAbi,
@@ -3256,7 +3427,7 @@ export const useReadMockUsdcBalanceOf = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"decimals"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useReadMockUsdcDecimals = /*#__PURE__*/ createUseReadContract({
   abi: mockUsdcAbi,
@@ -3267,7 +3438,7 @@ export const useReadMockUsdcDecimals = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"name"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useReadMockUsdcName = /*#__PURE__*/ createUseReadContract({
   abi: mockUsdcAbi,
@@ -3278,7 +3449,7 @@ export const useReadMockUsdcName = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"symbol"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useReadMockUsdcSymbol = /*#__PURE__*/ createUseReadContract({
   abi: mockUsdcAbi,
@@ -3289,7 +3460,7 @@ export const useReadMockUsdcSymbol = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"totalSupply"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useReadMockUsdcTotalSupply = /*#__PURE__*/ createUseReadContract({
   abi: mockUsdcAbi,
@@ -3300,7 +3471,7 @@ export const useReadMockUsdcTotalSupply = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockUsdcAbi}__
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useWriteMockUsdc = /*#__PURE__*/ createUseWriteContract({
   abi: mockUsdcAbi,
@@ -3310,7 +3481,7 @@ export const useWriteMockUsdc = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"approve"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useWriteMockUsdcApprove = /*#__PURE__*/ createUseWriteContract({
   abi: mockUsdcAbi,
@@ -3321,7 +3492,7 @@ export const useWriteMockUsdcApprove = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"mintTestTokens"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useWriteMockUsdcMintTestTokens =
   /*#__PURE__*/ createUseWriteContract({
@@ -3333,7 +3504,7 @@ export const useWriteMockUsdcMintTestTokens =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"transfer"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useWriteMockUsdcTransfer = /*#__PURE__*/ createUseWriteContract({
   abi: mockUsdcAbi,
@@ -3344,7 +3515,7 @@ export const useWriteMockUsdcTransfer = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"transferFrom"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useWriteMockUsdcTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -3356,7 +3527,7 @@ export const useWriteMockUsdcTransferFrom =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockUsdcAbi}__
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useSimulateMockUsdc = /*#__PURE__*/ createUseSimulateContract({
   abi: mockUsdcAbi,
@@ -3366,7 +3537,7 @@ export const useSimulateMockUsdc = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"approve"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useSimulateMockUsdcApprove =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3378,7 +3549,7 @@ export const useSimulateMockUsdcApprove =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"mintTestTokens"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useSimulateMockUsdcMintTestTokens =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3390,7 +3561,7 @@ export const useSimulateMockUsdcMintTestTokens =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"transfer"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useSimulateMockUsdcTransfer =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3402,7 +3573,7 @@ export const useSimulateMockUsdcTransfer =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockUsdcAbi}__ and `functionName` set to `"transferFrom"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useSimulateMockUsdcTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3414,7 +3585,7 @@ export const useSimulateMockUsdcTransferFrom =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mockUsdcAbi}__
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useWatchMockUsdcEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: mockUsdcAbi,
@@ -3424,7 +3595,7 @@ export const useWatchMockUsdcEvent = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mockUsdcAbi}__ and `eventName` set to `"Approval"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useWatchMockUsdcApprovalEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3436,7 +3607,7 @@ export const useWatchMockUsdcApprovalEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mockUsdcAbi}__ and `eventName` set to `"Transfer"`
  *
- * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x8A4fA3652D029f5cEb5c3df77633216ab53ac5fB)
+ * [__View Contract on Asset Chain Testnet Asset Chain Testnet Explorer__](https://scan-testnet.assetchain.org/address/0x024db3Ba5D3C6701dFeb2483bEab19c5650c43f9)
  */
 export const useWatchMockUsdcTransferEvent =
   /*#__PURE__*/ createUseWatchContractEvent({

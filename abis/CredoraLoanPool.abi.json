@@ -1704,6 +1704,11 @@
   },
   {
     "type": "error",
+    "name": "Pool__BorrowerCannotFundOwnLoan",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "Pool__DurationNotDivisibleByInstallments",
     "inputs": []
   },
