@@ -1,0 +1,149 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Full Guidelines for Credora’s Cinematic Sci-Fi Landing Page Using GraphQL, Framer Motion, Tailwind, and ShadCN
+globs: 
+alwaysApply: true
+---
+
+## Cursor AI Rule: Cinematic, Futuristic UI Architecture for Credora
+
+> ⚠️ Cursor must follow a **futuristic, cinematic sci-fi design system** with full control over animation flow, visual effects, layout logic, and component orchestration. Every section must evoke immersion, intelligence, and high-tech aura.
+
+---
+
+### 🌌 General Protocol
+
+- ✅ **Always check existing components, animations, and logic before generating new code**
+- ✅ Follow GraphQL as the data layer—NO REST endpoints
+- ✅ All new designs must reference and **extend existing futuristic visual grammar**
+
+---
+
+### 🚀 Theme & Visual Language
+
+- **Background**: Pure Black `#000000`
+- **Accent Colors**: Only use
+  - Neon Green `#00FF00`
+  - Neon Red `#FF3131`
+- **Font Stack**: Use futuristic, sci-fi fonts like `Orbitron`, `Space Grotesk`, `Share Tech Mono` (import from Google Fonts if needed)
+- **Glow and Motion**:
+  - Texts glow softly on black
+  - Buttons, borders, cards have **inner/outer glow** with subtle blur
+  - Use **cursor-following effects**, subtle **parallax scrolling**, **scroll reveal**, and **audio-reactive animations** where needed
+- **Auditory Design**: (Optional but ideal)
+  - Intro or hover interactions can have subtle sci-fi UI sounds
+- **Mood**: Futuristic, AI-first, cinematic like Cyberpunk 2077 or Blade Runner UI
+
+---
+
+### 🧠 Intro Component (`Intro.tsx`)
+
+- Rendered for **6 seconds only** on initial page load
+- Structured sequence of animated messages (Framer Motion, staggered):
+  - "Decentralized Credit Intelligence..."
+  - "AI that evaluates trust, not just tokens..."
+  - "Undercollateralized borrowing. Reinvented..."
+  - "Welcome to Credora."
+- Add:
+  - Framer Motion `layoutId` + `AnimatePresence`
+  - Flicker effects, scan lines, or chromatic aberration for final polish
+- Transitions into `<LandingLayout />` with fade/scale
+
+---
+
+### 📁 Architecture and File Structure
+
+#### 🔗 GraphQL Layer
+- GraphQL schema defined in: `schema.graphql`
+- Cursor must use this as the **source of truth**
+- Folders:
+  - `@/graphql/queries/` – All raw queries
+  - `@/graphql/mutations/` – All raw mutations
+  - `@/hooks/graphql/` – All generated/custom GraphQL hooks
+  - `@/lib/graphql-client.ts` – URQL or Apollo Client setup
+  - Hooks should:
+    - Use Zod or GraphQL types for validation
+    - Include suspense mode, error boundaries, retry logic
+    - Be used via custom hooks in components
+
+#### 🧱 Components
+
+- `@/components/ui/` – Atomic UI components (Button, Card, GlowContainer)
+- `@/components/sections/` – Full landing page sections
+- `@/components/skeletons/` – Skeleton loaders with neon shimmer
+- `@/components/Intro.tsx` – Fullscreen intro cinematic
+- `@/lib/animations.ts` – All Framer Motion variants + delay logic
+- `@/lib/utils.ts` – Utility helpers, typing utilities
+- `@/lib/constants.ts` – Centralized color, duration, easing curves
+
+---
+
+### 🎨 Component Design Guidelines
+
+#### 1. Styling & Theme
+- Tailwind for layout
+- ShadCN for base components (e.g., Modal, Dialog, Button)
+- Neon-only palette on black
+- All buttons, inputs, modals should:
+  - Glow
+  - Hover with pulse or scale effects
+  - Respond to cursor location subtly
+
+#### 2. Motion System
+- Motion variants defined in `@/lib/animations.ts`
+- Use `Framer Motion` for:
+  - Scroll reveals
+  - Section transitions
+  - Hover interactions
+  - Parallax and 3D transforms (rotation, skew, opacity)
+- No overuse of Framer Motion – variants should be **composable and shared**
+
+#### 3. Responsiveness
+- Fully responsive using Tailwind breakpoints
+- Touch support for all interactions
+- Use grid/flex patterns for layout adaptation
+- Avoid pixel sizes
+
+#### 4. Micro-Interactions
+- Hover states should animate (text glow, scale, vibration)
+- Use cursor-aware hover dynamics
+- Add particle or AI-trace effects on click if feasible
+- Animate modals with futuristic "slide in with distortion" effect
+
+---
+
+### 🛠 Implementation Rules
+
+1. **GraphQL only** – No REST, no app/api
+2. **Schema-first** – Use `schema.graphql` for everything
+3. **Pre-check** – Always inspect existing logic before generation
+4. Use `useSuspenseQuery` or equivalent for synchronous loading
+5. Always wrap hooks with fallback + skeleton UI
+6. Avoid duplicating motion variants or styles
+7. Do not hardcode animation values – reference `@/lib/constants.ts`
+8. All text should use sci-fi font family + animate glow
+9. Use ShadCN `Dialog`, `Drawer`, `Tooltip`, etc., for consistent modals
+
+---
+
+### ✅ Quality Assurance & Best Practices
+
+- ✅ No TypeScript or ESLint errors allowed
+- ✅ Reuse existing utilities, types, and components
+- ✅ All new components must:
+  - Be accessible
+  - Animate with purpose
+  - Be responsive and mobile-ready
+- ✅ Modular file system – no bloated files
+- ✅ All hooks, components, and variants must be typed
+- ✅ Document complex animations or layouts
+
+---
+
+> 🔭 **Goal:** Deliver a modular, scalable, cinematic UI for Credora – a futuristic, AI-powered DeFi protocol enabling undercollateralized lending. Every interaction should evoke precision, intelligence, and trust.
+
+
