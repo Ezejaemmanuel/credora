@@ -80,7 +80,7 @@ const ForLendersSection = () => {
               
               <div className="mt-8 p-4 bg-neonGreen/5 border border-neonGreen/20 rounded-md">
                 <p className="text-white/90 text-sm">
-                  "Lending on Credora has provided consistent yields higher than traditional DeFi protocols, with the security of knowing borrowers are thoroughly vetted."
+                  &quot;Lending on Credora has provided consistent yields higher than traditional DeFi protocols, with the security of knowing borrowers are thoroughly vetted.&quot;
                 </p>
                 <p className="text-right text-neonGreen mt-2 text-sm">— Crypto Yield Farmer</p>
               </div>

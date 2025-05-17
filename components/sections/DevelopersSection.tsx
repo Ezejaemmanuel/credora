@@ -99,7 +99,7 @@ function checkCreditworthiness(address _user)
                 </div>
                 
                 <p className="text-white/80 mb-6">
-                  Integrate Credora's scoring system into your own DeFi protocols or applications. Our comprehensive API and SDK make it easy to leverage our AI credit engine.
+                  Integrate Credora&lsquo;s scoring system into your own DeFi protocols or applications. Our comprehensive API and SDK make it easy to leverage our AI credit engine.
                 </p>
                 
                 <div className="flex flex-wrap gap-4 mb-8">

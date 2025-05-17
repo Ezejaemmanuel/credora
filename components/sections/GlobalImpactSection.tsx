@@ -66,7 +66,7 @@ const GlobalImpactSection = () => {
               >
                 <div className="text-center">
                   <p className="text-xl sm:text-2xl text-white mb-6 italic">
-                    "{testimonials[activeIndex].quote}"
+                    &#34;{testimonials[activeIndex].quote}&quot;
                   </p>
                   <p className="text-neonRed font-orbitron">
                     — {testimonials[activeIndex].author}
